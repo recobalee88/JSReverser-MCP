@@ -19,6 +19,7 @@
 - 脚本与源码分析：`list_scripts`、`get_script_source`、`find_in_script`、`search_in_scripts`
 - 断点与执行控制：`set_breakpoint`、`set_breakpoint_on_text`、`resume`、`pause`、`step_over/into/out`
 - Hook 与运行时观测：`create_hook`、`inject_hook`、`get_hook_data`、`hook_function`、`trace_function`
+- 页面早期注入：`inject_preload_script`，可在页面脚本执行前挂早期 hook、补环境脚本和首屏初始化采样
 - 网络与请求链路：`list_network_requests`、`get_network_request`、`get_request_initiator`、`break_on_xhr`
 - 一体化逆向工作流：`analyze_target`、`collect_code`、`understand_code`、`deobfuscate_code`、`risk_panel`
 - 页面自动化与 DOM：`navigate_page`、`query_dom`、`click_element`、`type_text`、`take_screenshot`
@@ -26,6 +27,13 @@
 - 反检测能力：`inject_stealth`、`list_stealth_presets`、`set_user_agent`
 
 完整参数说明见 `docs/tool-reference.md`。
+
+## 最近增强
+
+- `--autoConnect`：优先探测本机常见 DevTools 端口并接管已经打开的 Chrome，适合手动登录后再让 AI 接管。
+- `inject_preload_script`：在后续文档加载前执行脚本，适合首屏初始化、首次请求前参数生成、早期 hook 和补环境采样。
+- response body 超时降级：读取大响应体或卡住的响应时会超时返回，不再把整条采样链路拖死。
+- console 错误链展开：调试输出会展开 `Error.stack` 和 `cause` 链，便于从页面报错追到真实调用路径。
 
 ## 快速开始（3 分钟）
 
