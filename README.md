@@ -180,7 +180,7 @@ args = [
 
 - `skills/mcp-js-reverse-playbook`
 
-用于规范化执行前端 JS 逆向流程（Hook 优先、补环境、VMP 插桩、AST 去混淆、证据化输出）。
+用于规范化执行前端 JS 逆向流程（页面观察、task artifact 沉淀、local rebuild、本地补环境、VMP 插桩、AST 去混淆、证据化输出）。
 
 ### 本地安装（在仓库目录）
 
@@ -254,10 +254,27 @@ DEBUG=mcp:*
 
 ## 推荐逆向工作流
 
-### Hook 优先策略
+### Observe-first / local rebuild 策略
 
-> **重要：优先使用 Hook 工具而非断点工具。**
+> **重要：优先页面观察，随后最小化 Hook 采样，再进入 local rebuild。**
 >
+> 不要跳过页面证据直接猜 Node 环境。
+
+推荐顺序：
+
+1. 页面观察：`analyze_target`、`search_in_scripts`、`list_network_requests`、`get_request_initiator`
+2. 运行时采样：`create_hook`、`inject_hook`、`get_hook_data`
+3. 证据入库：`record_reverse_evidence`
+4. 本地导出：`export_rebuild_bundle`
+5. 本地补环境：`diff_env_requirements` + 逐步补 `env/entry.js`
+
+每次任务建议都写入 `artifacts/tasks/<taskId>/` 形成 task artifact，便于 Codex / Claude / Gemini 续做。
+
+相关文档：
+
+- `docs/reverse-artifacts.md`
+- `docs/codex-reverse-workflow.md`
+- `docs/reverse-task-index.md`
 > 本项目提供两套动态分析机制：**Hook（注入式）** 和 **Breakpoint（断点式）**。
 > 对于 AI 客户端，Hook 方式更可靠，因为断点需要暂停/恢复执行的多步协调，容易因时序问题导致超时或状态异常。
 

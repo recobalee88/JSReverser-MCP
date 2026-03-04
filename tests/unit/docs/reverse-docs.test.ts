@@ -1,0 +1,28 @@
+import assert from 'node:assert';
+import {readFile} from 'node:fs/promises';
+import path from 'node:path';
+import {describe, it} from 'node:test';
+
+const repoRoot = process.cwd();
+
+async function readRepoFile(relativePath: string): Promise<string> {
+  return readFile(path.join(repoRoot, relativePath), 'utf8');
+}
+
+describe('reverse workflow docs', () => {
+  it('documents task artifacts, local rebuild, and Codex workflow guidance', async () => {
+    const readme = await readRepoFile('README.md');
+    const reverseIndex = await readRepoFile('docs/reverse-task-index.md');
+    const artifactsDoc = await readRepoFile('docs/reverse-artifacts.md');
+    const codexDoc = await readRepoFile('docs/codex-reverse-workflow.md');
+
+    assert.ok(readme.includes('task artifact'));
+    assert.ok(readme.includes('local rebuild'));
+    assert.ok(reverseIndex.includes('export_rebuild_bundle'));
+    assert.ok(reverseIndex.includes('record_reverse_evidence'));
+    assert.ok(artifactsDoc.includes('timeline.jsonl'));
+    assert.ok(codexDoc.includes('Codex'));
+    assert.ok(codexDoc.includes('Observe-first'));
+    assert.ok(codexDoc.includes('env/entry.js'));
+  });
+});
