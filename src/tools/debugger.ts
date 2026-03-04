@@ -19,6 +19,24 @@ import {zod} from '../third_party/index.js';
 import {ToolCategory} from './categories.js';
 import {defineTool} from './ToolDefinition.js';
 
+function formatStackFrameLocation(
+  frame: {
+    url?: string;
+    scriptId?: string;
+    lineNumber: number;
+    columnNumber: number;
+  },
+  sourceMapURL?: string,
+): string {
+  const location = frame.url
+    ? `${frame.url}:${frame.lineNumber + 1}:${frame.columnNumber + 1}`
+    : `script ${frame.scriptId}:${frame.lineNumber + 1}:${frame.columnNumber + 1}`;
+
+  return sourceMapURL
+    ? `${location} [SourceMap: ${sourceMapURL}]`
+    : location;
+}
+
 /**
  * List all loaded JavaScript scripts in the current page.
  */
@@ -730,6 +748,7 @@ export const getRequestInitiator = defineTool({
   },
   handler: async (request, response, context) => {
     const {requestId} = request.params;
+    const debugger_ = context.debuggerContext;
 
     try {
       const httpRequest = context.getNetworkRequestById(requestId);
@@ -765,9 +784,10 @@ export const getRequestInitiator = defineTool({
         for (let i = 0; i < initiator.stack.callFrames.length; i++) {
           const frame = initiator.stack.callFrames[i];
           const functionName = frame.functionName || '(anonymous)';
-          const location = frame.url
-            ? `${frame.url}:${frame.lineNumber + 1}:${frame.columnNumber + 1}`
-            : `script ${frame.scriptId}:${frame.lineNumber + 1}:${frame.columnNumber + 1}`;
+          const script = frame.scriptId
+            ? debugger_.getScriptById(frame.scriptId)
+            : undefined;
+          const location = formatStackFrameLocation(frame, script?.sourceMapURL);
           response.appendResponseLine(
             `  ${i + 1}. ${functionName} @ ${location}`,
           );
@@ -782,9 +802,10 @@ export const getRequestInitiator = defineTool({
           for (let i = 0; i < initiator.stack.parent.callFrames.length; i++) {
             const frame = initiator.stack.parent.callFrames[i];
             const functionName = frame.functionName || '(anonymous)';
-            const location = frame.url
-              ? `${frame.url}:${frame.lineNumber + 1}:${frame.columnNumber + 1}`
-              : `script ${frame.scriptId}:${frame.lineNumber + 1}:${frame.columnNumber + 1}`;
+            const script = frame.scriptId
+              ? debugger_.getScriptById(frame.scriptId)
+              : undefined;
+            const location = formatStackFrameLocation(frame, script?.sourceMapURL);
             response.appendResponseLine(
               `  ${i + 1}. ${functionName} @ ${location}`,
             );
@@ -863,7 +884,15 @@ export const getPausedInfo = defineTool({
       const script = debugger_.getScriptById(frame.location.scriptId);
       const url =
         script?.url || frame.url || `script:${frame.location.scriptId}`;
-      const location = `${url}:${frame.location.lineNumber + 1}:${frame.location.columnNumber + 1}`;
+      const location = formatStackFrameLocation(
+        {
+          url,
+          scriptId: frame.location.scriptId,
+          lineNumber: frame.location.lineNumber,
+          columnNumber: frame.location.columnNumber,
+        },
+        script?.sourceMapURL,
+      );
       response.appendResponseLine(
         `  ${i}. ${frame.functionName} @ ${location}`,
       );

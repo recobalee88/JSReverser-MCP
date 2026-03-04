@@ -130,7 +130,11 @@ function makeContext(overrides: Partial<ToolContextHarness> = {}): ToolContextHa
     getScripts: () => [],
     getScriptsByUrlPattern: () => [],
     getScriptSource: async () => '',
-    getScriptById: () => ({ scriptId: '1', url: 'https://a.js' }),
+    getScriptById: () => ({
+      scriptId: '1',
+      url: 'https://a.js',
+      sourceMapURL: 'https://a.js.map',
+    }),
     searchInScripts: async () => ({ matches: [] }),
     setBreakpoint: async () => ({ breakpointId: 'bp1', locations: [{ lineNumber: 1 }] }),
     setBreakpointByUrlRegex: async () => ({ breakpointId: 'bp2', locations: [] }),
@@ -218,8 +222,8 @@ describe('debugger tools extended', () => {
       lineNumber: 4,
       columnNumber: 2,
       stack: {
-        callFrames: [{ functionName: 'fn', url: 'https://a.js', lineNumber: 1, columnNumber: 1 }],
-        parent: { callFrames: [{ functionName: 'parent', url: 'https://p.js', lineNumber: 1, columnNumber: 1 }] },
+        callFrames: [{ functionName: 'fn', scriptId: '1', url: 'https://a.js', lineNumber: 1, columnNumber: 1 }],
+        parent: { callFrames: [{ functionName: 'parent', scriptId: '1', url: 'https://p.js', lineNumber: 1, columnNumber: 1 }] },
       },
     });
 
@@ -232,6 +236,7 @@ describe('debugger tools extended', () => {
     assert.ok(response.lines.some((x) => x.includes('Breakpoint set successfully')));
     assert.ok(response.lines.some((x) => x.includes('Active breakpoints')));
     assert.ok(response.lines.some((x) => x.includes('Call Stack')));
+    assert.ok(response.lines.some((x) => x.includes('SourceMap')));
   });
 
   it('covers paused state commands and evaluation branches', async () => {
@@ -266,6 +271,7 @@ describe('debugger tools extended', () => {
     await pause.handler({ params: {} }, response as unknown as Parameters<typeof pause.handler>[1], context as unknown as Parameters<typeof pause.handler>[2]);
 
     assert.ok(response.lines.some((x) => x.includes('Execution Paused')));
+    assert.ok(response.lines.some((x) => x.includes('SourceMap')));
     assert.ok(response.lines.some((x) => x.includes('Result')));
     assert.ok(response.lines.some((x) => x.includes('Execution resumed') || x.includes('Pause requested')));
   });
