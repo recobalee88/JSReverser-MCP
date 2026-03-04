@@ -249,12 +249,15 @@ describe('rebuild bridge tools', () => {
       const capture = JSON.parse(await readFile(path.join(rootDir, 'task-003', 'env', 'capture.json'), 'utf8')) as Record<string, unknown>;
       const runtimeEvidence = capture.runtimeEvidence as Array<Record<string, unknown>>;
       const filteredScript = capture.targetScript as Record<string, unknown>;
+      const report = await readFile(path.join(rootDir, 'task-003', 'report.md'), 'utf8');
 
       assert.strictEqual(runtimeEvidence.length, 1);
       assert.strictEqual(runtimeEvidence[0].functionName, 'genH5st');
       assert.strictEqual(filteredScript.url, 'https://storage.360buyimg.com/js/h5st.js');
       assert.ok(!JSON.stringify(capture).includes('trackAd'));
       assert.ok(!JSON.stringify(capture).includes('analytics'));
+      assert.ok(report.includes('targetKeywords'));
+      assert.ok(report.includes('targetActionDescription'));
     } finally {
       runtime.reverseTaskStore = originalStore;
       runtime.collector.getTopPriorityFiles = originals.getTopPriorityFiles;
@@ -343,12 +346,15 @@ describe('rebuild bridge tools', () => {
       const capture = JSON.parse(await readFile(path.join(rootDir, 'task-004', 'env', 'capture.json'), 'utf8')) as Record<string, unknown>;
       const runtimeEvidence = capture.runtimeEvidence as Array<Record<string, unknown>>;
       const filteredScript = capture.targetScript as Record<string, unknown>;
+      const report = await readFile(path.join(rootDir, 'task-004', 'report.md'), 'utf8');
 
       assert.strictEqual(runtimeEvidence.length, 1);
       assert.strictEqual(runtimeEvidence[0].functionName, 'computeQtk9');
       assert.strictEqual(filteredScript.url, 'https://example.com/static/checkout.js');
       assert.ok(!JSON.stringify(capture).includes('trackHeartbeat'));
       assert.ok(!JSON.stringify(capture).includes('telemetry'));
+      assert.ok(report.includes('computeQtk9'));
+      assert.ok(report.includes('submit order button'));
     } finally {
       runtime.reverseTaskStore = originalStore;
       runtime.collector.getTopPriorityFiles = originals.getTopPriorityFiles;

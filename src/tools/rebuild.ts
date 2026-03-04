@@ -92,6 +92,24 @@ function buildAutoEntryCode(targetScript: CodeFile | undefined, capture: Record<
   ].join('\n');
 }
 
+function appendTargetContextNotes(
+  notes: string[],
+  options: {
+    targetKeywords: string[];
+    targetUrlPatterns: string[];
+    targetFunctionNames: string[];
+    targetActionDescription: string;
+  },
+): string[] {
+  return [
+    ...notes,
+    `targetKeywords: ${options.targetKeywords.length > 0 ? options.targetKeywords.join(', ') : '(none)'}`,
+    `targetUrlPatterns: ${options.targetUrlPatterns.length > 0 ? options.targetUrlPatterns.join(', ') : '(none)'}`,
+    `targetFunctionNames: ${options.targetFunctionNames.length > 0 ? options.targetFunctionNames.join(', ') : '(none)'}`,
+    `targetActionDescription: ${options.targetActionDescription.length > 0 ? options.targetActionDescription : '(none)'}`,
+  ];
+}
+
 function matchesTargetText(
   value: unknown,
   targetKeywords: string[],
@@ -213,10 +231,10 @@ async function buildAutoBundle(
     envCode: buildAutoEnvCode(capture),
     polyfillsCode: '',
     capture,
-    notes: [
+    notes: appendTargetContextNotes([
       targetScript ? `auto-selected target script: ${targetScript.url}` : 'no target script selected from collector',
       filteredRuntimeEvidence.length > 0 ? `filtered runtime evidence records: ${filteredRuntimeEvidence.length}` : 'no runtime evidence records found after target filtering',
-    ],
+    ], options),
   };
 }
 
