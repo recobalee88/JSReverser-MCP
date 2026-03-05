@@ -77,6 +77,7 @@ interface RuntimeHarness {
     getCollectedFilesSummary: RuntimeMethod;
     getTopPriorityFiles: RuntimeMethod;
     getActivePage: RuntimeMethod;
+    getStatus: RuntimeMethod;
   };
   domInspector: {
     querySelector: RuntimeMethod;
@@ -195,6 +196,7 @@ describe('jshook tools handlers', () => {
       replayActions: runtime.pageController.replayActions,
       evaluate: runtime.pageController.evaluate,
       getActivePage: runtime.collector.getActivePage,
+      getStatus: runtime.collector.getStatus,
       getBrowser: runtime.browserManager.getBrowser,
       injectAll: stealth.injectAll,
       getPresets: stealth.getPresets,
@@ -231,6 +233,11 @@ describe('jshook tools handlers', () => {
       }],
       totalSize: 1,
       totalFiles: 1,
+    });
+    runtime.collector.getStatus = async () => ({
+      running: true,
+      pagesCount: 1,
+      version: 'Chrome/145',
     });
 
     runtime.domInspector.querySelector = async () => ({ found: true, nodeName: 'DIV' });
@@ -568,6 +575,23 @@ describe('jshook tools handlers', () => {
       });
       await invokeTool(checkBrowserHealth as unknown as ToolDefinitionHarness, {}, res);
       runtime.browserManager.getBrowser = () => ({isConnected: () => false});
+      runtime.pageController.getPage = async () => activePage;
+      runtime.pageController.evaluate = async () => 2;
+      runtime.collector.getStatus = async () => ({
+        running: true,
+        pagesCount: 1,
+        version: 'Chrome/145',
+      });
+      const falseNegativeHealthStart = res.lines.length;
+      await invokeTool(checkBrowserHealth as unknown as ToolDefinitionHarness, {}, res);
+      const falseNegativeHealth = res.lines.slice(falseNegativeHealthStart).join('\n');
+      assert.ok(falseNegativeHealth.includes('"pageReady": true'));
+      assert.ok(!falseNegativeHealth.includes('BROWSER_DISCONNECTED'));
+      runtime.browserManager.getBrowser = () => ({isConnected: () => false});
+      runtime.collector.getStatus = async () => ({
+        running: false,
+        pagesCount: 0,
+      });
       runtime.pageController.getPage = async () => {
         throw new Error('no page');
       };
@@ -644,6 +668,7 @@ describe('jshook tools handlers', () => {
       runtime.pageController.replayActions = originals.replayActions;
       runtime.pageController.evaluate = originals.evaluate;
       runtime.collector.getActivePage = originals.getActivePage;
+      runtime.collector.getStatus = originals.getStatus;
       runtime.browserManager.getBrowser = originals.getBrowser;
       stealth.injectAll = originals.injectAll;
       stealth.getPresets = originals.getPresets;

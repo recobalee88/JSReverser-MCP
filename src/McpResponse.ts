@@ -546,7 +546,10 @@ export class McpResponse implements Response {
   }
 
   #getConsoleSourceMapHints(context: McpContext): Record<string, string> | undefined {
-    const scripts = context.debuggerContext.getScripts();
+    const scripts = context.debuggerContext?.getScripts?.();
+    if (!scripts?.length) {
+      return undefined;
+    }
     const hints = Object.fromEntries(
       scripts
         .filter((script) => Boolean(script.url) && Boolean(script.sourceMapURL))
