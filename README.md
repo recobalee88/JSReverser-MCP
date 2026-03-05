@@ -32,6 +32,7 @@
 
 - `--autoConnect`：优先探测本机常见 DevTools 端口并接管已经打开的 Chrome，适合手动登录后再让 AI 接管。
 - `inject_preload_script`：在后续文档加载前执行脚本，适合首屏初始化、首次请求前参数生成、早期 hook 和补环境采样。
+- 断点防卡死自动恢复：同一断点短时间高频命中时会自动执行 `resume` + `remove_breakpoint`，并在 `get_paused_info` 给出恢复提示，降低长时间无响应风险。
 - response body 超时降级：读取大响应体或卡住的响应时会超时返回，不再把整条采样链路拖死。
 - console 错误链展开：调试输出会展开 `Error.stack` 和 `cause` 链，便于从页面报错追到真实调用路径。
 
