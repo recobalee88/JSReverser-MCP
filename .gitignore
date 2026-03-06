@@ -168,3 +168,6 @@ artifacts/tasks/**/run/*.log
 
 # Never commit smoke task artifacts
 artifacts/tasks/smoke-task-*/
+
+# Local-only planning notes
+docs/plans/
