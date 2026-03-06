@@ -45,6 +45,7 @@
 5. 安全边界
 - 仓库内 case 仅保留抽象方法与流程文档。
 - 可执行逆向代码与链路产物统一放 `artifacts/tasks/`，敏感值必须脱敏后再入库。
+- Git 默认只提交 `artifacts/tasks/_TEMPLATE/`；真实 `artifacts/tasks/<task-id>/` 任务目录默认保留在本地，不直接入库。
 - 详见：`docs/case-safety-policy.md`、`docs/reverse-artifacts.md`。
 
 ## 核心能力

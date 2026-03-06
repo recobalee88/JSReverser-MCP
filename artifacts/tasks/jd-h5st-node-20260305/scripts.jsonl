@@ -1,4 +1,0 @@
-{"ts":"2026-03-05T14:29:17Z","source":"mcp","scriptUrl":"https://storage.360buyimg.com/webcontainer/main/js_security_v3_main.js?v=20260305","note":"JD主签名安全脚本加载"}
-{"ts":"2026-03-05T14:29:17Z","source":"mcp","scriptUrl":"https://storage.360buyimg.com/webcontainer/main/js-security-v3-rac-beta.js?v=20260305","note":"JD rac脚本加载"}
-{"ts":"2026-03-05T22:29:12Z","source":"local-node","file":"run/sign.mjs","locator":{"type":"function","name":"generateH5st"},"note":"本地签名入口"}
-{"ts":"2026-03-05T22:29:12Z","source":"local-node","file":"run/sign.mjs","locator":{"type":"constructor","name":"ParamsSign*"},"note":"签名构造器解析"}

@@ -1,4 +1,0 @@
-{"ts":"2026-03-05T22:29:12Z","stage":"observe","note":"verify.mjs输出 hasH5st=true, h5stParts=10"}
-{"ts":"2026-03-05T22:29:12Z","stage":"verify","note":"verify-api.mjs: status=200, rs=0, itemCount=20"}
-{"ts":"2026-03-05T22:29:12Z","stage":"verify","note":"verify-api2.mjs: status=200, retcode=0"}
-{"ts":"2026-03-05T14:29:19Z","stage":"cross-check","note":"MCP reqid=74 请求参数包含h5st，响应rs=0，与本地验证口径一致"}

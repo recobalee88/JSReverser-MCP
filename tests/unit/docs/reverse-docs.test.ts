@@ -20,6 +20,7 @@ describe('reverse workflow docs', () => {
     const readme = await readRepoFile('README.md');
     const reverseIndex = await readRepoFile('docs/reverse-task-index.md');
     const artifactsDoc = await readRepoFile('docs/reverse-artifacts.md');
+    const caseSafetyPolicy = await readRepoFile('docs/case-safety-policy.md');
     const codexDoc = await readRepoFile('docs/codex-reverse-workflow.md');
     const envPatchingDoc = await readRepoFile('docs/env-patching-guide.md');
     const updatePromptTemplate = await readRepoFile('docs/reverse-update-prompt-template.md');
@@ -33,6 +34,7 @@ describe('reverse workflow docs', () => {
 
     assert.ok(readme.includes('task artifact'));
     assert.ok(readme.includes('local rebuild'));
+    assert.ok(readme.includes('Git 默认只提交 `artifacts/tasks/_TEMPLATE/`'));
     assert.ok(reverseIndex.includes('export_rebuild_bundle'));
     assert.ok(reverseIndex.includes('record_reverse_evidence'));
     assert.ok(artifactsDoc.includes('timeline.jsonl'));
@@ -47,6 +49,8 @@ describe('reverse workflow docs', () => {
     assert.ok(updatePromptTemplate.includes('不要猜'));
     assert.ok(reverseReportTemplate.includes('目标接口与字段'));
     assert.ok(reverseReportTemplate.includes('task artifact'));
+    assert.ok(caseSafetyPolicy.includes('仅 `artifacts/tasks/_TEMPLATE/` 允许默认入库'));
+    assert.ok(caseSafetyPolicy.includes('真实 `artifacts/tasks/<task-id>/` 默认视为本地私有任务目录'));
     assert.ok(algorithmUpgradeTemplate.includes('first divergence'));
     assert.ok(algorithmUpgradeTemplate.includes('targetFunctionNames'));
     assert.ok(algorithmUpgradeTemplate.includes('env rebuild'));

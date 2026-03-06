@@ -1,3 +1,0 @@
-{"ts":"2026-03-05T13:52:00Z","stage":"observe","note":"定位签名调用点 Ee.call('$encode') 与版本调用 Ee.call('$getCatVersion')"}
-{"ts":"2026-03-05T13:54:00Z","stage":"rebuild","note":"确认 vendor 导出 aj 可用，原型包含 eval/run/call/createFiber"}
-{"ts":"2026-03-05T14:00:00Z","stage":"verify","note":"strict接口 no/fake签名均 result=50，real签名 result=1"}

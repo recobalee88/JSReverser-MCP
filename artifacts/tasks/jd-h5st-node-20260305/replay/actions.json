@@ -1,6 +1,0 @@
-[
-  {"action":"navigate","url":"https://m.jd.com/"},
-  {"action":"wait","delay":2000},
-  {"action":"observe-network","code":"定位 api.m.jd.com/api recommend_like_m 请求，检查 query 中 h5st"},
-  {"action":"observe-network","code":"定位 sso.jd.com/sso/rac 请求，确认返回 nfd"}
-]

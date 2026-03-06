@@ -1,2 +1,0 @@
-{"ts":"2026-03-05T13:58:54Z","stage":"capture","request":{"method":"POST","url":"/rest/wd/kconf/get","queryKeys":["__NS_hxfalcon","caver"]},"response":{"status":200,"result":1,"hasData":true},"note":"browser mcp reqid=697"}
-{"ts":"2026-03-05T14:00:22Z","stage":"verify","request":{"method":"POST","url":"/rest/wd/ugH5App/tag/text/feed/recent","queryKeys":["__NS_hxfalcon","caver"]},"response":{"status":200,"result":1,"hasData":true,"feedCount":18},"note":"node real sign"}

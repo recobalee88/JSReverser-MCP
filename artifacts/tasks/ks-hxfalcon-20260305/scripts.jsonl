@@ -1,2 +1,0 @@
-{"ts":"2026-03-05T13:53:10Z","scriptId":"487","url":".../index-B33KLgVE.js","locator":{"type":"find_in_script","query":"Ee.call('$encode')"},"note":"签名入口调用点"}
-{"ts":"2026-03-05T13:53:45Z","scriptId":"349","url":".../vendor-DTdE3Y9G.js","locator":{"type":"find_in_script","query":"this.realm.global[e].apply(this,n)"},"note":"VM call桥接实现"}
