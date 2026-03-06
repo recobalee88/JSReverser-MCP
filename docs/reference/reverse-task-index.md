@@ -15,8 +15,8 @@
 1. 先读 `artifacts/tasks/<task-id>/`（若存在）
 2. 再读 `scripts/cases/*` 抽象 case
 3. 最后按模板新建流程：
-   - `docs/parameter-methodology-template.md`
-   - `docs/parameter-site-mapping-template.md`
+   - `docs/reference/parameter-methodology-template.md`
+   - `docs/reference/parameter-site-mapping-template.md`
 
 ## 1) 快速摸清页面加载了什么脚本
 
@@ -69,7 +69,7 @@
 
 适合在页面里确认请求链路后，导出 `env/entry.js`、`env/env.js`、`env/polyfills.js`、`env/capture.json` 做 local rebuild。
 
-补环境原则请同时参考：`docs/env-patching-guide.md`
+补环境原则请同时参考：`docs/reference/env-patching.md`
 
 ## 6) 评估风险和加密实现
 
@@ -125,15 +125,15 @@
 
 ## 11) 参数总表
 
-完整参数与字段说明请查：`docs/tool-reference.md`
+完整参数与字段说明请查：`docs/reference/tool-reference.md`
 
 ## 12) 参数复现模板复用（推荐）
 
 遇到“某个参数可复现”任务时，先走模板而不是临时写脚本：
 
-1. 先填站点无关模板：`docs/parameter-methodology-template.md`
-2. 再填站点映射模板：`docs/parameter-site-mapping-template.md`
+1. 先填站点无关模板：`docs/reference/parameter-methodology-template.md`
+2. 再填站点映射模板：`docs/reference/parameter-site-mapping-template.md`
 3. 按模板执行 Observe/Capture/Rebuild/Verify
 4. 可执行代码与完整链路统一放 `artifacts/tasks/<task-id>/`
 
-安全约束：`docs/case-safety-policy.md`
+安全约束：`docs/reference/case-safety-policy.md`

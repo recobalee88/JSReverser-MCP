@@ -51,6 +51,6 @@
 - first divergence 是否变化？
 
 ## 7. 关联文档
-- 方法论模板：`docs/parameter-methodology-template.md`
-- 安全规范：`docs/case-safety-policy.md`
-- 工具读写契约：`docs/tool-io-contract.md`
+- 方法论模板：`docs/reference/parameter-methodology-template.md`
+- 安全规范：`docs/reference/case-safety-policy.md`
+- 工具读写契约：`docs/reference/tool-io-contract.md`

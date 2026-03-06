@@ -164,6 +164,7 @@ artifacts/tasks/**/run/*.log
 # Local-only executable reverse cases (never commit)
 .local-cases/
 .local-private/
+.local-docs/
 
 # Never commit smoke task artifacts
 artifacts/tasks/smoke-task-*/

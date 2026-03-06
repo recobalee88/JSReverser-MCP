@@ -9,6 +9,44 @@
 - 代理诊断优先，盲补禁止
 - 每次补丁都要能追溯到页面证据或本地报错
 
+## 两阶段目标
+
+本仓库默认把“本地补环境”和“外部语言调用”拆成两个阶段：
+
+### 阶段 1：Node 补环境复现
+
+目标：
+
+- 在 Node 里跑通目标链路
+- 找出最小依赖集合
+- 确认 first divergence
+- 逐步删掉无关宿主和无关补丁
+
+这一阶段的主产物是：
+
+- `env/env.js`
+- `env/polyfills.js`
+- `env/entry.js`
+
+### 阶段 2：可移植 JS 导出
+
+目标：
+
+- 把已经跑通的链路提纯成可调用的完整 JS
+- 减少对 Node 特有能力和调试脚手架的依赖
+- 为 Python `execjs`、`quickjs` 或其他宿主提供稳定函数入口
+
+这一阶段的目标产物通常是：
+
+- `run/exported-runtime.js`
+- 或其他单文件 / 少量文件的 bundle
+
+关键原则：
+
+- 不要一开始就用 `Python + execjs` 做补环境
+- 应该先在 Node 里补环境跑通，再导出可移植 JS
+- `execjs` 更适合“调用提纯后的函数”，不适合“调试补环境过程”
+
 ## 固定阶段
 
 ### 1. MCP 页面取证
@@ -79,6 +117,26 @@
 - 能说明为什么只补这一项
 - 补完后立刻复测
 
+## 补丁判定表
+
+| 观测现象 | 常见缺口类型 | 推荐补法 | 不该做什么 |
+|---|---|---|---|
+| `navigator.userAgent`、`location.href` 这类读取返回 `undefined` | 基础值缺失 | 直接补最小常量值 | 不要顺手补整套 `navigator` / `location` 伪实现 |
+| `document.createElement is not a function` | 函数壳缺失 | 先用 `makeFunction("createElement")` 挂函数壳 | 不要直接补完整 DOM 实现 |
+| `Cannot read properties of undefined (reading 'style')` 且前一步刚调用了 `createElement()` | 返回对象结构缺失 | 给该函数补最小返回对象 | 不要把无关字段一并补全 |
+| `localStorage.getItem is not a function` | 宿主对象方法缺失 | 补 storage shim 的最小方法集 | 不要引入站点私有缓存值 |
+| `crypto.subtle` / `TextEncoder` 缺失 | 平台 API 缺失 | 补最小平台 API 外壳或 polyfill | 不要臆造算法结果 |
+
+## 负面示例
+
+以下做法都属于盲补，不应出现：
+
+- 页面里还没确认依赖来源，就一次性补完整 `window/document/navigator/crypto`
+- 看到某个请求需要 Cookie，就手写真实 Cookie 原值进 `env.js`
+- `createElement` 缺失时，直接复制一整套第三方 DOM 模拟库
+- 只因为别的站点用过某个字段，就把相同字段硬塞到当前任务里
+- 没有 first divergence 记录，只凭“脚本大概会读这个”去补宿主
+
 ## 文件职责边界
 
 ### `env/env.js`
@@ -143,3 +201,13 @@
 - `env/capture.json`
 
 这四个文件共同构成最小 local rebuild 骨架。
+
+如果后续要给 Python `execjs` 或其他宿主使用，建议额外导出：
+
+- `run/exported-runtime.js`
+
+该文件的目标不是继续调试补环境，而是暴露稳定函数入口，例如：
+
+- `genSign(...)`
+- `getToken(...)`
+- `buildHeaders(...)`

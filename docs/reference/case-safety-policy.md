@@ -6,6 +6,15 @@
 - 约束仓库内 `scripts/cases/*` 仅保留抽象方法，不存放可直接复用的完整逆向/签名实现。
 - 降低被直接滥用的法律与合规风险。
 
+## 仓库文档分层
+
+- `docs/reference/`：放规则、契约、模板、索引
+- `docs/guides/`：放给人类用户看的操作指南
+- `scripts/cases/README.md`：放公开参数 / 链路索引
+- `artifacts/tasks/<task-id>/`：放本地私有任务产物，不作为仓库公开文档入口
+
+新增正式文档时，不要再直接放到 `docs/` 根目录。
+
 ## 强制规则
 1. 仓库内 case 文件必须是“不可运行抽象模板”。
 2. 仓库内 case 只允许包含：
@@ -37,6 +46,7 @@
 1. 优先读取 `artifacts/tasks/<task-id>/`（完整链路）。
 2. 若不存在对应 task，再读取 `scripts/cases/*` 抽象 case。
 3. 若仍无参考，按方法论模板新建任务并沉淀到 `artifacts/tasks/`。
+4. 如果要公开展示“有哪些参数 / 链路已沉淀”，统一更新 `scripts/cases/README.md`，不要把真实 task 目录当公开索引。
 
 ## 评审清单
 - 该 case 是否在仓库内可直接运行？
