@@ -1,5 +1,11 @@
 function printAbstractCaseGuide() {
-  console.log(`Kuaishou __NS_hxfalcon Abstract Case (Non-runnable)
+  console.log(`Case: 某手 falcon 风控参数
+Category: 风控参数
+Status: abstract-case
+Runtime: pure-node
+Scope: non-runnable
+
+Kuaishou __NS_hxfalcon Abstract Case (Non-runnable)
 
 This case intentionally does NOT contain executable signing code.
 It only defines the workflow and acceptance criteria for repeatable analysis.
@@ -45,7 +51,7 @@ Security constraints:
 
 References:
 - scripts/cases/jd-h5st-pure-node.mjs
-- docs/case-safety-policy.md
+- docs/reference/case-safety-policy.md
 `);
 }
 

@@ -1,5 +1,11 @@
 function printAbstractCaseGuide() {
-  console.log(`Douyin a_bogus Abstract Case (Non-runnable)
+  console.log(`Case: 某音 a-bogus 参数
+Category: 参数签名
+Status: abstract-case
+Runtime: pure-node
+Scope: non-runnable
+
+Douyin a_bogus Abstract Case (Non-runnable)
 
 This case intentionally does NOT contain executable signing code.
 It defines the end-to-end reconstruction workflow and acceptance criteria.
@@ -66,7 +72,7 @@ Implementation path:
 References:
 - scripts/cases/jd-h5st-pure-node.mjs
 - scripts/cases/ks-hxfalcon-pure-node.mjs
-- docs/case-safety-policy.md
+- docs/reference/case-safety-policy.md
 `);
 }
 

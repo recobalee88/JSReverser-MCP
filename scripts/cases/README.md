@@ -9,17 +9,34 @@
 ### 某东 `h5st` 参数
 
 - Case: `scripts/cases/jd-h5st-pure-node.mjs`
-- 说明：Node 补环境签名链路抽象 case
+- Category: 参数签名
+- Status: abstract-case
+- Runtime: pure-node
+- Notes: Node 补环境签名链路抽象 case
 
 ### 某手 `falcon` 风控参数
 
 - Case: `scripts/cases/ks-hxfalcon-pure-node.mjs`
-- 说明：风控链路定位与 local rebuild 抽象 case
+- Category: 风控参数
+- Status: abstract-case
+- Runtime: pure-node
+- Notes: 风控链路定位与 local rebuild 抽象 case
 
 ### 某音 `a-bogus` 参数
 
 - Case: `scripts/cases/douyin-a-bogus-pure-node.mjs`
-- 说明：参数链路定位与纯 Node 复现抽象 case
+- Category: 参数签名
+- Status: abstract-case
+- Runtime: pure-node
+- Notes: 参数链路定位与纯 Node 复现抽象 case
+
+## 字段规范
+
+- `Case`: 仓库内公开的抽象 case 文件路径
+- `Category`: 参数签名、风控参数、设备指纹等分类
+- `Status`: 当前沉淀状态，例如 `abstract-case`
+- `Runtime`: 当前主要复现运行时，例如 `pure-node`
+- `Notes`: 一句话说明这个 case 覆盖的目标和边界
 
 ## 使用约束
 

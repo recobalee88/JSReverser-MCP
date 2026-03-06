@@ -49,6 +49,10 @@ describe('reverse workflow docs', () => {
     assert.ok(caseIndex.includes('scripts/cases/jd-h5st-pure-node.mjs'));
     assert.ok(caseIndex.includes('某手 `falcon` 风控参数'));
     assert.ok(caseIndex.includes('如果新增公开参数 / 链路入口，统一更新本文件'));
+    assert.ok(caseIndex.includes('Category: 参数签名'));
+    assert.ok(caseIndex.includes('Status: abstract-case'));
+    assert.ok(caseIndex.includes('Runtime: pure-node'));
+    assert.ok(caseIndex.includes('字段规范'));
     assert.ok(reverseIndex.includes('export_rebuild_bundle'));
     assert.ok(reverseIndex.includes('record_reverse_evidence'));
     assert.ok(artifactsDoc.includes('timeline.jsonl'));
