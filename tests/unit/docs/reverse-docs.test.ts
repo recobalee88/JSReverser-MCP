@@ -42,11 +42,11 @@ describe('reverse workflow docs', () => {
     assert.ok(readme.includes('文档入口'));
     assert.ok(readme.includes('参考项目'));
     assert.ok(readme.includes('某东 `h5st` 参数'));
-    assert.ok(readme.includes('scripts/cases/README.md'));
+    assert.ok(readme.includes('[scripts/cases/README.md](scripts/cases/README.md)'));
     assert.ok(readme.includes('Git 默认只提交 `artifacts/tasks/_TEMPLATE/`'));
     assert.deepStrictEqual(docsRootFiles, []);
     assert.ok(caseIndex.includes('某东 `h5st` 参数'));
-    assert.ok(caseIndex.includes('scripts/cases/jd-h5st-pure-node.mjs'));
+    assert.ok(caseIndex.includes('[scripts/cases/jd-h5st-pure-node.mjs](jd-h5st-pure-node.mjs)'));
     assert.ok(caseIndex.includes('某手 `falcon` 风控参数'));
     assert.ok(caseIndex.includes('如果新增公开参数 / 链路入口，统一更新本文件'));
     assert.ok(caseIndex.includes('Category: 参数签名'));

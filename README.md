@@ -26,16 +26,16 @@
 以下参数链路已有公开索引，可作为仓库内复用入口：
 
 - 某东 `h5st` 参数
-  - 索引：`scripts/cases/README.md`
-  - Case：`scripts/cases/jd-h5st-pure-node.mjs`
+  - 索引：[scripts/cases/README.md](scripts/cases/README.md)
+  - Case：[scripts/cases/jd-h5st-pure-node.mjs](scripts/cases/jd-h5st-pure-node.mjs)
 
 - 某手 `falcon` 风控参数
-  - 索引：`scripts/cases/README.md`
-  - Case：`scripts/cases/ks-hxfalcon-pure-node.mjs`
+  - 索引：[scripts/cases/README.md](scripts/cases/README.md)
+  - Case：[scripts/cases/ks-hxfalcon-pure-node.mjs](scripts/cases/ks-hxfalcon-pure-node.mjs)
 
 - 某音 `a-bogus` 参数
-  - 索引：`scripts/cases/README.md`
-  - Case：`scripts/cases/douyin-a-bogus-pure-node.mjs`
+  - 索引：[scripts/cases/README.md](scripts/cases/README.md)
+  - Case：[scripts/cases/douyin-a-bogus-pure-node.mjs](scripts/cases/douyin-a-bogus-pure-node.mjs)
 
 说明：
 
@@ -103,7 +103,7 @@
 - `dump_session_state`
 - `load_session_state`
 
-完整参数说明见 `docs/reference/tool-reference.md`。
+完整参数说明见 [docs/reference/tool-reference.md](docs/reference/tool-reference.md)。
 
 ## 标准任务结构
 
@@ -175,9 +175,9 @@
 
 详见：
 
-- `docs/reference/case-safety-policy.md`
-- `docs/reference/reverse-artifacts.md`
-- `docs/reference/env-patching.md`
+- [docs/reference/case-safety-policy.md](docs/reference/case-safety-policy.md)
+- [docs/reference/reverse-artifacts.md](docs/reference/reverse-artifacts.md)
+- [docs/reference/env-patching.md](docs/reference/env-patching.md)
 
 ## 3 分钟快速开始
 
@@ -225,33 +225,33 @@ args = ["/ABSOLUTE/PATH/JSReverser-MCP/build/src/index.js"]
 
 如果你需要接管已经打开的浏览器，请继续看：
 
-- `docs/guides/browser-connection.md`
-- `docs/guides/client-configuration.md`
+- [docs/guides/browser-connection.md](docs/guides/browser-connection.md)
+- [docs/guides/client-configuration.md](docs/guides/client-configuration.md)
 
 ## 文档入口
 
 ### Guides
 
-- 快速开始：`docs/guides/getting-started.md`
-- 浏览器连接：`docs/guides/browser-connection.md`
-- 客户端配置：`docs/guides/client-configuration.md`
-- 逆向工作流：`docs/guides/reverse-workflow.md`
-- 补环境规范：`docs/reference/env-patching.md`
+- 快速开始：[docs/guides/getting-started.md](docs/guides/getting-started.md)
+- 浏览器连接：[docs/guides/browser-connection.md](docs/guides/browser-connection.md)
+- 客户端配置：[docs/guides/client-configuration.md](docs/guides/client-configuration.md)
+- 逆向工作流：[docs/guides/reverse-workflow.md](docs/guides/reverse-workflow.md)
+- 补环境规范：[docs/reference/env-patching.md](docs/reference/env-patching.md)
 
 ### Reference
 
-- 逆向任务索引：`docs/reference/reverse-task-index.md`
-- 工具参数总表：`docs/reference/tool-reference.md`
-- 工具读写契约：`docs/reference/tool-io-contract.md`
-- 任务产物说明：`docs/reference/reverse-artifacts.md`
+- 逆向任务索引：[docs/reference/reverse-task-index.md](docs/reference/reverse-task-index.md)
+- 工具参数总表：[docs/reference/tool-reference.md](docs/reference/tool-reference.md)
+- 工具读写契约：[docs/reference/tool-io-contract.md](docs/reference/tool-io-contract.md)
+- 任务产物说明：[docs/reference/reverse-artifacts.md](docs/reference/reverse-artifacts.md)
 
 ### Templates And Supporting Docs
 
-- `docs/reference/reverse-update-prompt-template.md`
-- `docs/reference/reverse-report-template.md`
-- `docs/reference/algorithm-upgrade-template.md`
-- `docs/reference/parameter-methodology-template.md`
-- `docs/reference/parameter-site-mapping-template.md`
+- [docs/reference/reverse-update-prompt-template.md](docs/reference/reverse-update-prompt-template.md)
+- [docs/reference/reverse-report-template.md](docs/reference/reverse-report-template.md)
+- [docs/reference/algorithm-upgrade-template.md](docs/reference/algorithm-upgrade-template.md)
+- [docs/reference/parameter-methodology-template.md](docs/reference/parameter-methodology-template.md)
+- [docs/reference/parameter-site-mapping-template.md](docs/reference/parameter-site-mapping-template.md)
 
 ## 开发与测试
 
@@ -266,7 +266,7 @@ npm run coverage:full
 
 更多问题排查请看：
 
-- `docs/guides/browser-connection.md`
+- [docs/guides/browser-connection.md](docs/guides/browser-connection.md)
 
 ## 参考项目
 

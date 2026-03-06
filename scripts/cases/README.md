@@ -8,7 +8,7 @@
 
 ### 某东 `h5st` 参数
 
-- Case: `scripts/cases/jd-h5st-pure-node.mjs`
+- Case: [scripts/cases/jd-h5st-pure-node.mjs](jd-h5st-pure-node.mjs)
 - Category: 参数签名
 - Status: abstract-case
 - Runtime: pure-node
@@ -16,7 +16,7 @@
 
 ### 某手 `falcon` 风控参数
 
-- Case: `scripts/cases/ks-hxfalcon-pure-node.mjs`
+- Case: [scripts/cases/ks-hxfalcon-pure-node.mjs](ks-hxfalcon-pure-node.mjs)
 - Category: 风控参数
 - Status: abstract-case
 - Runtime: pure-node
@@ -24,7 +24,7 @@
 
 ### 某音 `a-bogus` 参数
 
-- Case: `scripts/cases/douyin-a-bogus-pure-node.mjs`
+- Case: [scripts/cases/douyin-a-bogus-pure-node.mjs](douyin-a-bogus-pure-node.mjs)
 - Category: 参数签名
 - Status: abstract-case
 - Runtime: pure-node
@@ -47,6 +47,6 @@
 
 更多工具入口请看：
 
-- `docs/reference/reverse-task-index.md`
-- `docs/reference/tool-reference.md`
-- `docs/reference/case-safety-policy.md`
+- [docs/reference/reverse-task-index.md](../../docs/reference/reverse-task-index.md)
+- [docs/reference/tool-reference.md](../../docs/reference/tool-reference.md)
+- [docs/reference/case-safety-policy.md](../../docs/reference/case-safety-policy.md)
