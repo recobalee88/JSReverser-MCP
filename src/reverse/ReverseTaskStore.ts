@@ -4,8 +4,10 @@
  * Copyright 2026 Google LLC
  * SPDX-License-Identifier: Apache-2.0
  */
+import {existsSync} from 'node:fs';
 import {appendFile, mkdir, readFile, stat, writeFile} from 'node:fs/promises';
 import path from 'node:path';
+import {fileURLToPath} from 'node:url';
 
 import type {
   ReverseTaskDescriptor,
@@ -73,11 +75,36 @@ async function shouldResetPlaceholderJsonl(targetPath: string): Promise<boolean>
   }
 }
 
+function findPackageRoot(fromDir: string): string | undefined {
+  let currentDir = fromDir;
+
+  while (true) {
+    if (existsSync(path.join(currentDir, 'package.json'))) {
+      return currentDir;
+    }
+
+    const parentDir = path.dirname(currentDir);
+    if (parentDir === currentDir) {
+      return undefined;
+    }
+    currentDir = parentDir;
+  }
+}
+
+function resolveDefaultTaskRootDir(): string {
+  const packageRoot = findPackageRoot(path.dirname(fileURLToPath(import.meta.url)));
+  if (packageRoot) {
+    return path.join(packageRoot, 'artifacts', 'tasks');
+  }
+
+  return path.join(process.cwd(), 'artifacts', 'tasks');
+}
+
 export class ReverseTaskStore implements ReverseTaskReadApi {
   readonly rootDir: string;
 
   constructor(options: ReverseTaskStoreOptions = {}) {
-    this.rootDir = options.rootDir ?? path.join(process.cwd(), 'artifacts', 'tasks');
+    this.rootDir = options.rootDir ?? resolveDefaultTaskRootDir();
   }
 
   async openTask(input: ReverseTaskOpenInput): Promise<ReverseTaskHandle> {
